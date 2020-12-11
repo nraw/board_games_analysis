@@ -2,6 +2,7 @@
 
 ## What are the highest rated games?
 ### Highest by year
+<iframe src="charts/rating_through_time.html"></iframe>
 
 ## Which games are most wished for?
 
