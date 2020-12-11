@@ -39,5 +39,5 @@ if __name__ == "__main__":
 
     df = get_data()
     fig = fig_rating_wished(df)
-    fig.show()
-    #  fig.save("charts/rating_year.html")
+    #  fig.show()
+    fig.save("charts/rating_weight.html")
