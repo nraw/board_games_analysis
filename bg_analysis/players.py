@@ -9,10 +9,15 @@ def get_most_rated(df):
     most_rated.iloc[0].T
     most_rated = most_rated[most_rated.averageweight != 0]
     most_rated = most_rated[most_rated.expansion == False]
+    most_rated = most_rated[most_rated.reimplementation == False]
+    most_rated = most_rated.dropna(subset=["bestplayers"])
+    most_rated = most_rated[~most_rated.bestplayers.str.contains("\+")]
+    most_rated = most_rated[most_rated.yearpublished <= 2020]
+
     return most_rated
 
 
-def fig_rating_wished(df):
+def fig_best_players(df):
     most_rated = get_most_rated(df)
     fig = (
         (
@@ -23,11 +28,12 @@ def fig_rating_wished(df):
                 x=alt.X("wishing:Q", scale=alt.Scale(type="linear")),
                 #  color="yearpublished:O",
                 tooltip=["name", "yearpublished", "average", "wishing", "id"],
+                facet=alt.Facet("bestplayers:N")
                 #  size="wishing",
                 #  opacity="wishing",
             )
         )
-        .properties(title="Highest rated games through time", width=1000, height=400)
+        .properties(title="Highest rated games through time", width=50, height=400)
         .interactive()
     )
     return fig
@@ -37,6 +43,6 @@ if __name__ == "__main__":
     from bg_analysis.de import get_data
 
     df = get_data()
-    fig = fig_rating_wished(df)
-    #  fig.show()
-    fig.save("charts/rating_weight.html")
+    fig = fig_best_players(df)
+    fig.show()
+    #  fig.save("charts/rating_weight.html")

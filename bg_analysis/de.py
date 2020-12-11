@@ -10,6 +10,7 @@ from tqdm import tqdm
 
 alt.data_transformers.disable_max_rows()
 
+tqdm.pandas()
 
 @lru_cache(1)
 def get_data():
@@ -21,12 +22,15 @@ def get_data():
     logger.info("Generating dataframe")
     df = pd.DataFrame(all_data).T
     logger.info("Expanding ratings data")
-    df_stats = df.stats.apply(pd.Series)
+    df_stats = df.stats.progress_apply(pd.Series)
     df = pd.concat([df, df_stats], axis=1)
     logger.info("Expanded ratings data")
     logger.info("Checking reimplementations")
     df["reimplementation"] = is_reimplementation(df)
     logger.info("Checked reimplementations")
+    logger.info("Obtaining best players")
+    df['bestplayers'] = restructure_players_stats(df.players)
+    logger.info("Obtained best players")
     return df
 
 
@@ -42,28 +46,35 @@ def get_game_in_list(families):
     return game_in_list
 
 
+def get_players_stats(df):
+    bestplayers = df.suggested_players.progress_apply(restructure_players_stats)
+
+
+def restructure_players_stats(players):
+    if players:
+        results = pd.DataFrame(players["results"])
+        best_ratings = results.loc["best_rating"]
+        best_best_ratings = list(best_ratings[best_ratings == best_ratings.max()].index)
+        bestplayers = get_best_num_players(best_best_ratings)
+    else:
+        bestplayers = None
+    return bestplayers
+
+
+
+def get_best_num_players(best_best_ratings):
+    try:
+        bestplayers = str(round(np.mean(([int(rating) for rating in best_best_ratings]))))
+    except ValueError as e:
+        bestplayers = best_best_ratings[-1]
+    return bestplayers
+
+
 def test_game_in_list():
     families = ["Game: High Frontier", "Space: Pluto"]
     game_in_list = get_game_in_list(families)
     assert game_in_list == True
 
-
-def get_players_stats(df):
-    pass
-
-
-def restructure_players_stats(players):
-    results = pd.DataFrame(players["results"])
-    best_ratings = results.loc["best_rating"]
-    best_best_ratings = list(best_ratings[best_ratings == best_ratings.max()].index)
-
-
-def check_plus(best_best_ratings):
-    try:
-        value = str(round(np.mean(([int(rating) for rating in best_best_ratings]))))
-    except ValueError as e:
-        value = best_best_ratings[-1]
-    return value
 
 
 def test_restructure():
@@ -84,13 +95,7 @@ def test_restructure():
                 "best_rating": 1,
                 "recommended_rating": 0,
                 "not_recommended_rating": 0,
-            },
-            "4": {
-                "best_rating": 1,
-                "recommended_rating": 0,
-                "not_recommended_rating": 0,
-            },
-            "4+": {
+            "3+": {
                 "best_rating": 0,
                 "recommended_rating": 0,
                 "not_recommended_rating": 1,

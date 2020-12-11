@@ -11,6 +11,10 @@ from bg_analysis.de import get_data
 alt.data_transformers.disable_max_rows()
 
 
+def plots():
+    df = get_data()
+
+
 def plot_rating_year(df):
     from bg_analysis.rating_year import fig_rating_year
 
@@ -25,6 +29,9 @@ def plot_rating_wished(df):
     fig.show()
 
 
-def plot_highest_rated(df):
-    pass
+def plot_rating_weight(df):
+    from bg_analysis.rating_weight import fig_rating_weight
+
+    fig_rating_weight(df)
+    fig.show()
 
