@@ -8,9 +8,8 @@ from functools import lru_cache
 from loguru import logger
 from tqdm import tqdm
 
-alt.data_transformers.disable_max_rows()
-
 tqdm.pandas()
+
 
 @lru_cache(1)
 def get_data():
@@ -26,28 +25,45 @@ def get_data():
     df = pd.concat([df, df_stats], axis=1)
     logger.info("Expanded ratings data")
     logger.info("Checking reimplementations")
+    df["game_family"] = get_game_family_names(df)
     df["reimplementation"] = is_reimplementation(df)
     logger.info("Checked reimplementations")
     logger.info("Obtaining best players")
-    df['bestplayers'] = restructure_players_stats(df.players)
+    df["bestplayers"] = get_players_stats(df)
     logger.info("Obtained best players")
     return df
 
 
+def get_game_family_names(df):
+    game_families = df.families.apply(get_game_in_list)
+    return game_families
+
+
 def is_reimplementation(df):
-    reimplementations = df.families.apply(get_game_in_list)
+    max_game_family_rated = (
+        df[df.game_family != ""].groupby("game_family")["usersrated"].max()
+    )
+    max_max = df.game_family.apply(lambda x: max_game_family_rated.get(x))
+    is_main_game = df.usersrated == max_max
     special_editions = df.name.apply(lambda x: "Edition" in x)
-    reimplementations = reimplementations | special_editions
+    reimplementations = (
+        (df.game_family != "") & (is_main_game != True)
+    ) | special_editions
     return reimplementations
 
 
 def get_game_in_list(families):
-    game_in_list = any([family[:5] == "Game:" for family in families])
-    return game_in_list
+    game_in_list = [family for family in families if family[:5] == "Game:"]
+    if game_in_list:
+        game = game_in_list[0].replace("Game: ", "")
+    else:
+        game = ""
+    return game
 
 
 def get_players_stats(df):
     bestplayers = df.suggested_players.progress_apply(restructure_players_stats)
+    return bestplayers
 
 
 def restructure_players_stats(players):
@@ -55,17 +71,18 @@ def restructure_players_stats(players):
         results = pd.DataFrame(players["results"])
         best_ratings = results.loc["best_rating"]
         best_best_ratings = list(best_ratings[best_ratings == best_ratings.max()].index)
-        bestplayers = get_best_num_players(best_best_ratings)
+        bestplayer = get_best_num_players(best_best_ratings)
     else:
-        bestplayers = None
-    return bestplayers
-
+        bestplayer = None
+    return bestplayer
 
 
 def get_best_num_players(best_best_ratings):
     try:
-        bestplayers = str(round(np.mean(([int(rating) for rating in best_best_ratings]))))
-    except ValueError as e:
+        bestplayers = str(
+            round(np.mean(([int(rating) for rating in best_best_ratings])))
+        )
+    except ValueError:
         bestplayers = best_best_ratings[-1]
     return bestplayers
 
@@ -73,33 +90,4 @@ def get_best_num_players(best_best_ratings):
 def test_game_in_list():
     families = ["Game: High Frontier", "Space: Pluto"]
     game_in_list = get_game_in_list(families)
-    assert game_in_list == True
-
-
-
-def test_restructure():
-    players = {
-        "total_votes": 1,
-        "results": {
-            "1": {
-                "best_rating": 0,
-                "recommended_rating": 0,
-                "not_recommended_rating": 1,
-            },
-            "2": {
-                "best_rating": 1,
-                "recommended_rating": 0,
-                "not_recommended_rating": 0,
-            },
-            "3": {
-                "best_rating": 1,
-                "recommended_rating": 0,
-                "not_recommended_rating": 0,
-            "3+": {
-                "best_rating": 0,
-                "recommended_rating": 0,
-                "not_recommended_rating": 1,
-            },
-        },
-    }
-
+    assert game_in_list

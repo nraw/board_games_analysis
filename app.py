@@ -32,6 +32,13 @@ def plot_rating_wished(df):
 def plot_rating_weight(df):
     from bg_analysis.rating_weight import fig_rating_weight
 
-    fig_rating_weight(df)
+    fig = fig_rating_weight(df)
+    fig.show()
+
+
+def plot_best_players(df):
+    from bg_analysis.players import fig_best_players
+
+    fig = fig_best_players(df)
     fig.show()
 
