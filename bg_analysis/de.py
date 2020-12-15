@@ -31,6 +31,9 @@ def get_data():
     logger.info("Obtaining best players")
     df["bestplayers"] = get_players_stats(df)
     logger.info("Obtained best players")
+    logger.info("Obtaining number of expansions")
+    df["num_expansions"] = df.expansions.apply(len)
+    logger.info("Obtained number of expansions")
     return df
 
 

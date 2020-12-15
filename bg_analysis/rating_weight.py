@@ -68,5 +68,6 @@ if __name__ == "__main__":
 
     df = get_data()
     fig = fig_rating_weight(df)
-    fig.show()
-    #  fig.save("charts/rating_weight.html")
+    #  fig.show()
+    fig.save("charts/rating_weight.html")
+    fig.save("charts/rating_weight.png")

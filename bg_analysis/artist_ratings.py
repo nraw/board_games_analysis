@@ -1,4 +1,5 @@
 import altair as alt
+from bg_analysis.de_people import get_artists
 
 alt.data_transformers.disable_max_rows()
 
@@ -22,7 +23,8 @@ def get_aggregates(artists):
     return artists_agg
 
 
-def fig_artist_ratings(artists):
+def fig_artist_ratings(df):
+    artists = get_artists(df)
     artists_agg = get_aggregates(artists)
     fig = (
         (
@@ -51,10 +53,7 @@ def fig_artist_ratings(artists):
 if __name__ == "__main__":
     from bg_analysis.de import get_data
 
-    #  from bg_analysis.de_people import get_artists
-
     df = get_data()
-    artists = get_artists(df)
-    fig = fig_artist_ratings(artists)
+    fig = fig_artist_ratings(df)
     fig.show()
     #  fig.save("charts/artists_ratings.html")

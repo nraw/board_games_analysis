@@ -35,3 +35,4 @@ if __name__ == "__main__":
     df = get_data()
     fig = fig_rating_year(df)
     fig.save("charts/rating_year.html")
+    fig.save("charts/rating_year.png")

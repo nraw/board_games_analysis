@@ -19,15 +19,15 @@ def fig_rating_wished(df):
             alt.Chart(most_rated)
             .mark_point()
             .encode(
-                y=alt.Y("average:Q", scale=alt.Scale(zero=False)),
-                x=alt.X("wishing:Q", scale=alt.Scale(type="linear")),
+                x=alt.X("average:Q", title="BGG Rating", scale=alt.Scale(zero=False)),
+                y=alt.Y("wishing:Q", title="Wished", scale=alt.Scale(type="linear")),
                 #  color="yearpublished:O",
                 tooltip=["name", "yearpublished", "average", "wishing", "id"],
                 #  size="wishing",
                 #  opacity="wishing",
             )
         )
-        .properties(title="Highest rated games through time", width=1000, height=400)
+        .properties(title="Best games on BGG", width=1000, height=400)
         .interactive()
     )
     return fig
@@ -39,4 +39,5 @@ if __name__ == "__main__":
     df = get_data()
     fig = fig_rating_wished(df)
     #  fig.show()
-    fig.save("charts/rating_weight.html")
+    fig.save("charts/rating_wished.html")
+    fig.save("charts/rating_wished.png")

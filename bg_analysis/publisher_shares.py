@@ -1,4 +1,5 @@
 import altair as alt
+from bg_analysis.de_people import get_publishers
 import pandas as pd
 
 alt.data_transformers.disable_max_rows()
@@ -21,11 +22,11 @@ def get_aggregates(publishers):
     top_threshold = top_publishers.iloc[15].id
     big_publishers = publishers_agg.id > top_threshold
     publishers_agg = publishers_agg[big_publishers]
-
     return publishers_agg
 
 
-def fig_publisher_shares(publishers):
+def fig_publisher_shares(df):
+    publishers = get_publishers(df)
     publishers_agg = get_aggregates(publishers)
     fig = (
         (
@@ -71,7 +72,8 @@ def get_wishing_aggregates(publishers):
     return publishers_agg
 
 
-def fig_publisher_wishes(publishers):
+def fig_publisher_wishes(df):
+    publishers = get_publishers(df)
     publishers_agg = get_wishing_aggregates(publishers)
     fig = (
         (
@@ -100,10 +102,7 @@ def fig_publisher_wishes(publishers):
 if __name__ == "__main__":
     from bg_analysis.de import get_data
 
-    #  from bg_analysis.de_people import get_publishers
-
     df = get_data()
-    publishers = get_publishers(df)
     fig = fig_publisher_shares(publishers)
-    fig.show()
-    #  fig.save("charts/publishers_ratings.html")
+    #  fig.show()
+    #  fig.save("charts/publishers_games.html")
