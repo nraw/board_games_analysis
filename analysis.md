@@ -77,6 +77,11 @@ Or this religious beauty: https://www.youtube.com/watch?v=86pIbGeBJPQ
 Also checked negotiation game and found out about Dune which looks like a jewel and having watched a video about it we found out about War of the Ring which should be an awesome 2 player war game.
 Under Maze category we found Burgle Bros which might be an awesome Co-op game!
 
+An interesting party game Deception: Hong Kong - https://www.youtube.com/watch?v=CDWvHrt6kG0
+The Resistance: Avalon is also very sneaky.
+Just one is a party game where everybody gets to try to describe 1 word with different words.
+
+
 ## Most diverse creators (most different categories/mechanics x ratings per creator)
 
 ## What mechanics are the most rated? Top rated per mechanic? What are the most/least common mechanics?

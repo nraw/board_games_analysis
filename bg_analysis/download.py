@@ -56,5 +56,5 @@ def get_game_info(game):
 
 
 def dump(batch, games_info):
-    filename = f"data/{batch[0]}-{batch[1]}.json"
+    filename = f"data/dump/{batch[0]}-{batch[1]}.json"
     json.dump(games_info, open(filename, "w"))

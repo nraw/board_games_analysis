@@ -6,14 +6,16 @@ def get_most_rated(df):
     #  most_rated = df[df.wishing > 10]
     most_rated = df[df.wishing > 100]
     #  most_rated = df[df.usersrated > 150]
-    most_rated.iloc[0].T
     most_rated = most_rated[most_rated.averageweight != 0]
     most_rated = most_rated[most_rated.expansion == False]
     return most_rated
 
 
-def fig_rating_wished(df):
-    most_rated = get_most_rated(df)
+def fig_rating_wished(df, apply_filter=True):
+    if apply_filter:
+        most_rated = get_most_rated(df)
+    else:
+        most_rated = df
     fig = (
         (
             alt.Chart(most_rated)

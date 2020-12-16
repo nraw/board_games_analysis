@@ -7,6 +7,7 @@ from functools import lru_cache
 
 from loguru import logger
 from tqdm import tqdm
+from bg_analysis.de_geeklist import get_geeklist
 
 tqdm.pandas()
 
@@ -14,7 +15,7 @@ tqdm.pandas()
 @lru_cache(1)
 def get_data():
     logger.info("Loading jsons.")
-    batches = pathlib.Path("data").glob("*.json")
+    batches = pathlib.Path("data/dump").glob("*.json")
     all_data = {}
     _ = [all_data.update(json.load(open(batch))) for batch in tqdm(batches)]
     logger.info("Loaded jsons.")
@@ -34,6 +35,15 @@ def get_data():
     logger.info("Obtaining number of expansions")
     df["num_expansions"] = df.expansions.apply(len)
     logger.info("Obtained number of expansions")
+    logger.info("Obtaining Dice Tower geeklist")
+    dice_tower = get_geeklist("265480")
+    df["dice_tower_excellence"] = df.id.isin(dice_tower)
+    logger.info("Obtained Dice Tower geeklist")
+    logger.info("Obtaining SUSD geeklist")
+    susd = get_geeklist("244099")
+    df["susd"] = df.id.isin(susd)
+    logger.info("Obtained SUSD geeklist")
+
     return df
 
 
