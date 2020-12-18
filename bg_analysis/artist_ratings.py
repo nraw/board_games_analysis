@@ -1,4 +1,5 @@
 import altair as alt
+
 from bg_analysis.de_people import get_artists
 
 alt.data_transformers.disable_max_rows()
@@ -16,6 +17,7 @@ def get_aggregates(artists):
             "name": lambda x: ", ".join(x[:3]),
             "usersrated": "sum",
             "yearpublished": "max",
+            "wishing": "sum",
         }
     )
     artists_agg = artists_agg.reset_index()
@@ -31,20 +33,26 @@ def fig_artist_ratings(df):
             alt.Chart(artists_agg)
             .mark_point()
             .encode(
-                x=alt.X("id:Q", scale=alt.Scale(type="log")),
-                y=alt.Y("average:Q", scale=alt.Scale(zero=False)),
-                color="yearpublished:O",
+                x=alt.X(
+                    "id:Q",
+                    title="Contributions",
+                    scale=alt.Scale(type="log", nice=False, domain=[0.9, 500]),
+                ),
+                y=alt.Y(
+                    "average:Q", title="Average BGG Rating", scale=alt.Scale(zero=False)
+                ),
+                color=alt.Color("wishing:O", legend=None),
                 tooltip=[
                     "artists",
                     "average",
                     "id",
                     "name",
-                    "usersrated",
+                    "wishing",
                     "yearpublished",
                 ],
             )
         )
-        .properties(title="Artists ratings vs contributions", width=800, height=800)
+        .properties(title="Artists ratings vs contributions", width=1000, height=400)
         .interactive()
     )
     return fig

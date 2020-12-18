@@ -19,7 +19,7 @@ def fig_wished_owned(df):
             .mark_point()
             .encode(
                 x=alt.X("owned:Q", title="Owned"),
-                y=alt.Y("wishing:Q", title="Wishlisted"),
+                y=alt.Y("wishing:Q", title="Wishing"),
                 #  color="yearpublished:O",
                 tooltip=["name", "yearpublished", "wishing", "owned", "average", "id"],
                 #  size="wishing",
@@ -30,6 +30,51 @@ def fig_wished_owned(df):
         .interactive()
     )
     return fig
+
+
+def fig_wished_owned_annotations(df):
+    cool_games_list = [
+        "Pandemic",
+        "Carcassonne",
+        "Catan",
+        "7 Wonders",
+        "Terraforming Mars",
+        "Scythe",
+        "Gloomhaven",
+        "Dominion",
+        "Ticket to Ride",
+        "Codenames",
+        "Love Letter",
+        "Munchkin",
+        "7 Wonders Duel",
+        "Small World",
+        "Agricola",
+        "Azul",
+        "Splendor",
+        "King of Tokyo",
+        "Scrabble",
+        "Risk",
+        "Chess",
+    ]
+    df = fix_annotations(df)
+    cool_games = df[df.name.isin(cool_games_list)]
+    cool_games = cool_games.sort_values("wishing").drop_duplicates(subset="name")
+    annotation = (
+        alt.Chart(cool_games)
+        .mark_text(align="left", baseline="middle", fontSize=9, dx=7)
+        .encode(x="owned", y="fix", text="name")
+    )
+    return annotation
+
+
+def fix_annotations(df):
+    fixes = [("Scythe", 0), ("Risk", 300), ("7 Wonders Duel", -200)]
+    fixes = pd.DataFrame(fixes, columns=["name", "fix"])
+    if "fix" in df:
+        df = df.drop("fix", axis=1)
+    df = df.merge(fixes, on="name", how="left")
+    df["fix"] = df.fix.fillna(0) + df.wishing
+    return df
 
 
 if __name__ == "__main__":

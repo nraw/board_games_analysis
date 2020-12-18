@@ -24,8 +24,8 @@ def fig_best_players(df):
             alt.Chart(most_rated)
             .mark_point()
             .encode(
-                y=alt.Y("average:Q", scale=alt.Scale(zero=False)),
-                x=alt.X("averageweight:Q", scale=alt.Scale(type="linear")),
+                y=alt.Y("average:Q", title="BGG Rating", scale=alt.Scale(zero=False)),
+                x=alt.X("averageweight:Q", scale=alt.Scale(type="linear"), title=""),
                 #  color="yearpublished:O",
                 tooltip=[
                     "name",
@@ -35,18 +35,21 @@ def fig_best_players(df):
                     "wishing",
                     "id",
                 ],
-                facet=alt.Facet("bestplayers:Q"),
-                color="bestplayers:Q",
-                #  size="wishing",
-                #  opacity="wishing",
+                facet=alt.Facet("bestplayers:Q", title=""),
+                color=alt.Color(
+                    "group_count:O",
+                    scale=alt.Scale(scheme="blues"),
+                    title="Number of games",
+                    legend=None,
+                ),
             )
-        )
+        ).transform_joinaggregate(group_count="count(*)", groupby=["bestplayers"])
+        #  .transform_aggregate(whatever="count(id)", groupby=["bestplayers"])
         .properties(
             title="Games depending on the ideal number of players to play them",
             width=50,
             height=400,
         )
-        .interactive()
     )
     return fig
 
@@ -56,5 +59,5 @@ if __name__ == "__main__":
 
     df = get_data()
     fig = fig_best_players(df)
-    #  fig.show()
-    fig.save("charts/best_players.html")
+    fig.show()
+    #  fig.save("charts/best_players.html")

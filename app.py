@@ -6,7 +6,9 @@ import pandas as pd
 from loguru import logger
 
 import altair as alt
-import fire
+
+#  import fire
+import argh
 
 alt.data_transformers.disable_max_rows()
 
@@ -40,12 +42,13 @@ def app_bu():
 def show_plot(df_filtered, applied_filters):
     fig = fig_filtered(df_filtered)
     fig = fig.properties(title=", ".join(applied_filters))
-    fig.save("charts/temp.html")
     fig.show()
+    #  fig.save("charts/temp.html")
 
 
 def fig_filtered(df_filtered, max_limit=1000):
     df_filtered = df_filtered.head(max_limit)
+    selection = alt.selection_multi(fields=["recommendations"], bind="legend")
     fig = (
         (
             alt.Chart(df_filtered)
@@ -53,10 +56,16 @@ def fig_filtered(df_filtered, max_limit=1000):
             .encode(
                 x=alt.X("averageweight:Q", scale=alt.Scale(zero=False)),
                 y=alt.Y("average:Q", scale=alt.Scale(zero=False)),
-                color=alt.Color("wishing:Q", scale=alt.Scale(type="log")),
+                color=alt.Color("recommendations"),
+                opacity=alt.condition(
+                    selection,
+                    alt.Opacity("wishing:Q", scale=alt.Scale(type="log")),
+                    alt.value(0.1),
+                ),
                 tooltip=[
                     "name",
                     "yearpublished",
+                    "recommendations",
                     "wishing",
                     "average",
                     "usersrated",
@@ -64,7 +73,8 @@ def fig_filtered(df_filtered, max_limit=1000):
                 ],
             )
         )
-        .properties(title="Rating vs weight", width=800, height=800)
+        .add_selection(selection)
+        .properties(width=800, height=800)
         .interactive()
     )
     return fig
@@ -134,4 +144,5 @@ def apply_filter(data_filter, df_filtered, all_filters):
 
 
 if __name__ == "__main__":
-    fire.Fire(app_bu)
+    #  fire.Fire(app_bu)
+    argh.dispatch_commands([app_bu, app_td])

@@ -1,18 +1,18 @@
 # Board game analysis
 
-## What are the highest rated games?
+Data + this guy is on vacation = Analysis!
 
-## Which games are most wished for?
+Click on any of the charts for the interactive versions with tooltips! Ooooh... tooltips...!
+
+## What are the best games out there?
+
+The definition of "Best game" is not as easy to define as one would hope. A simple rating sort would inevitably put some barely rated games very high, not to mention the fact that expansions and newer editions tend to be better rated than the base games. I strived to aproximate the best game metric, by observing metrics such as best rated and most wished.
 
 [![Foo](charts/rating_wished.png)](charts/rating_wished.html)
 
-### Highest by year
-
-[![Foo](charts/rating_year.png)](charts/rating_year.html)
-
 ## Wished vs owned?
 
-The definition of "Best game" is hard to define. In order to aproximate that metric, I strived towards combining metrics such as best rated and most wished, but owned could also be on that list. Intuitively, the game everybody has, would surely be the best game out there, right? 
+I chose most wished, but owned could also be on that list. Intuitively, the game everybody has, would surely be the best game out there, right? 
 
 The problem with owned games is that a game doesn't have to be good for people to put it on their owned list. In my analysis I wanted to check what people want to have, rather than what they own. This leaves out from the analysis omni-present games like Uno, Scrabble and Monopoly. 
 
@@ -27,18 +27,29 @@ A problem with the wished definition is that it is biased towards expensive game
 
 [![Foo](charts/rating_weight.png)](charts/rating_weight.html)
 
-## What games are best depending on number of players?
+## What are the best games depending on number of players?
 The hell was the North African campaign game for 10 people...
 
 [![Foo](charts/best_players.png)](charts/best_players.html)
 
 ## Playtime analysis
-### What are the best games per playing time?
+### What are the best games base on playing time?
 
 [![Foo](charts/shortest_games.png)](charts/shortest_games.html)
 
+Sometimes there's a need for easier and quicker games. Mostly these are referred to filler games as they could be played as a side to the main game of the evening.
+
+- [The Crew](https://www.youtube.com/watch?v=D7efIcZFMp8) looks amazing!
+- [Inhuman conditions](https://www.youtube.com/watch?v=pLR6yGVJs0Y) 
+- [KLASK](https://www.youtube.com/watch?v=ZTpPzAzzwyU) looks super entertaining although maybe looks more like a toy?
+
+
+
 ### What are the longest games?
-The longest game is the same masterpiece as the one for 10 people from before... 60k minutes yaay
+The longest game that seems to have some support is the same masterpiece as the one for 10 people from before with a whooping 1000 hours of estimated playtime.
+
+Most of these games are part of the Advanced Squad Leader (ASL).
+It's hard to take seriously most of the rest of the games on this list, alas, here it is. And if someone asks you how long is the longest game on bgg.. well it's half a million hours long.
 
 [![Foo](charts/longest_games.png)](charts/longest_games.html)
 
@@ -54,7 +65,6 @@ Artist with most stuff / highest ratings
 
 [![Foo](charts/artists_ratings.png)](charts/artists_ratings.html)
 
-combo? artists that worked with most designers, publishers?
 
 ### Designers
 [![Foo](charts/designers_ratings.png)](charts/designers_ratings.html)
@@ -67,28 +77,27 @@ combo? artists that worked with most designers, publishers?
 [![Foo](charts/publishers_wishes.png)](charts/publishers_wishes.html)
 
 
-## What categories are the best/most rated? Top games per category?
+## What are the most and least common categories? What are the best games per category?
 
 [![Foo](charts/categories.png)](charts/categories.html)
 
-For example, found a really interesting pirates board game: Forgotten Waters
-https://boardgamegeek.com/boardgame/302723/forgotten-waters
-Or this religious beauty: https://www.youtube.com/watch?v=86pIbGeBJPQ
-Also checked negotiation game and found out about Dune which looks like a jewel and having watched a video about it we found out about War of the Ring which should be an awesome 2 player war game.
-Under Maze category we found Burgle Bros which might be an awesome Co-op game!
+For example, I found
+- an interesting story driven pirates game: [Forgotten Waters](https://boardgamegeek.com/boardgame/302723/forgotten-waters)
+- Or this religious beauty: [Virgin Queen](https://www.youtube.com/watch?v=86pIbGeBJPQ)
 
-An interesting party game Deception: Hong Kong - https://www.youtube.com/watch?v=CDWvHrt6kG0
-The Resistance: Avalon is also very sneaky.
-Just one is a party game where everybody gets to try to describe 1 word with different words.
+Having checked negotiation games and found out about [Dune](https://www.youtube.com/watch?v=O6BKjk_2UTE) which looks like a jewel and having watched the linked video about it, we found out about [War of the Ring](https://www.youtube.com/watch?v=MvgooNB8Ck0) which seems like an awesome 2 player war game.
+
+Under the Maze category we found [Burgle Bros](https://www.youtube.com/watch?v=XLeYbGKf0aY) which might be an awesome Co-op game!
+
+A party game that sparked my attention was [Deception: Hong Kong](https://www.youtube.com/watch?v=CDWvHrt6kG0) and [The Resistance: Avalon](https://www.youtube.com/watch?v=rXlK3NZjLGc) looks very sneaky.
+I've played [Just one](https://www.youtube.com/watch?v=PG5QE_YUw1E) and [Monikers](https://www.youtube.com/watch?v=yvdpPc5ZVlE) before, but didn't catch their names, so this research helped me with that!
 
 
-## Most diverse creators (most different categories/mechanics x ratings per creator)
-
-## What mechanics are the most rated? Top rated per mechanic? What are the most/least common mechanics?
+## What are the most common mechanics? What are the best games per mechanic?
 
 [![Foo](charts/mechanics.png)](charts/mechanics.html)
 
-The king's dilemma kinda sticks out in the negotiation games. It's a legacy game for 5 people where you fight over a kingdom! (Game of Thrones much?)
+[The King's Dilemma](https://www.youtube.com/watch?v=XaTHH7xDRqE) sticks out to me in the negotiation games (which seems to be both a mechanic and a category..). It's a legacy game for 5 people where you fight over a kingdom!
 
 ## Which games have the most expansions?
 Carcassone? Bang? Magic the Gathering?
@@ -98,13 +107,15 @@ Well.. sort of, but they are shadowed by games like Advanced Squad Leader with a
 
 [![Foo](charts/most_wished_expansions.png)](charts/most_wished_expansions.html)
 
+### Highest by year
 
-## Dice tower games
-https://boardgamegeek.com/geeklist/181261/dice-towers-seal-excellence?titlesonly=1
+[![Foo](charts/rating_year.png)](charts/rating_year.html)
 
-## Possible additional analysis
-Which games have the most implementations?
 
+## Dice Tower Certificate of Excellence and Shut up & Sit Down Recommendations
+[![Foo](charts/susd_dt.png)](charts/susd_dt.html)
+
+---
 
 # Appendix
 
@@ -116,3 +127,10 @@ My assumptions:
 - I don't count reimplementations where I managed to identify these.
 - When there was a family of games, I only took the most popular (the one with the most `usersratings`) as I considered that to be the flagship of the games. This allowed me to drop various spin-offs of the same game.
 - In many of the stats I also did a cut of games that either had a certain amount of ratings or that were wished by at least a certain amount of people. The goal here is to weed out games that are either too new or not relevant enough to count as statistics. Apologies if your very niche game did not appear where you wanted to see it, but already with these the charts were massive.
+
+## Possible additional analysis
+- Which games have the most implementations?
+- Most diverse creators (most different categories/mechanics x ratings per creator)
+    - combo? artists that worked with most designers, publishers?
+
+

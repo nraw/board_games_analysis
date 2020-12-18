@@ -1,4 +1,5 @@
 import altair as alt
+
 from bg_analysis.de_people import get_designers
 
 alt.data_transformers.disable_max_rows()
@@ -16,6 +17,7 @@ def get_aggregates(designers):
             "name": lambda x: ", ".join(x[:3]),
             "usersrated": "sum",
             "yearpublished": "max",
+            "wishing": "sum",
         }
     )
     designers_agg = designers_agg.reset_index()
@@ -31,20 +33,26 @@ def fig_designer_ratings(df):
             alt.Chart(designers_agg)
             .mark_point()
             .encode(
-                x=alt.X("id:Q", scale=alt.Scale(zero=True, type="log")),
-                y=alt.Y("average:Q", scale=alt.Scale(zero=False)),
-                color="yearpublished:O",
+                x=alt.X(
+                    "id:Q",
+                    title="Contributions",
+                    scale=alt.Scale(type="log", nice=False, domain=[0.9, 500]),
+                ),
+                y=alt.Y(
+                    "average:Q", title="Average BGG Rating", scale=alt.Scale(zero=False)
+                ),
+                color=alt.Color("wishing:O", legend=None),
                 tooltip=[
                     "designers",
                     "average",
                     "id",
                     "name",
-                    "usersrated",
+                    "wishing",
                     "yearpublished",
                 ],
             )
         )
-        .properties(title="Designers ratings vs contributions", width=800, height=800)
+        .properties(title="Designers ratings vs contributions", width=1000, height=400)
         .interactive()
     )
     return fig
@@ -55,5 +63,5 @@ if __name__ == "__main__":
 
     df = get_data()
     fig = fig_designer_ratings(df)
-    #  fig.show()
+    fig.show()
     #  fig.save("charts/designers_ratings.html")

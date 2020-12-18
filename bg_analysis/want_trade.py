@@ -18,9 +18,13 @@ def fig_want_trade(df):
             alt.Chart(most_rated)
             .mark_point()
             .encode(
-                y=alt.Y("wanting:Q", scale=alt.Scale()),
-                x=alt.X("trading:Q", scale=alt.Scale()),
-                #  color="yearpublished:O",
+                y=alt.Y("wanting:Q", title="Wanting", scale=alt.Scale()),
+                x=alt.X("trading:Q", title="Trading", scale=alt.Scale()),
+                color=alt.Color(
+                    "average:Q",
+                    scale=alt.Scale(scheme="yellowgreenblue"),
+                    title="BGG Rating",
+                ),
                 tooltip=[
                     "name",
                     "yearpublished",
@@ -33,7 +37,7 @@ def fig_want_trade(df):
                 #  opacity="wishing",
             )
         )
-        .properties(title="Most traded games", width=800, height=800)
+        .properties(title="Most traded games", width=1000, height=400)
         .interactive()
     )
     return fig
@@ -44,6 +48,6 @@ if __name__ == "__main__":
 
     df = get_data()
     fig = fig_want_trade(df)
-    #  fig.show()
-    fig.save("charts/want_trade.html")
-    fig.save("charts/want_trade.png")
+    fig.show()
+    #  fig.save("charts/want_trade.html")
+    #  fig.save("charts/want_trade.png")

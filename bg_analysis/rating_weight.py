@@ -9,6 +9,7 @@ def get_voted(df):
     voted = voted[voted.expansion == False]
     voted = voted[voted.reimplementation == False]
     voted = voted[voted.averageweight != 0]
+    voted = voted.sort_values("wishing", ascending=False).head(8000)
     return voted
 
 
@@ -22,25 +23,37 @@ def fig_rating_weight(df):
 
 def get_base_fig(voted):
     fig = (
-        (
-            alt.Chart(voted)
-            .mark_point()
-            .encode(
-                x=alt.X("averageweight:Q", scale=alt.Scale(zero=False)),
-                y=alt.Y("average:Q", scale=alt.Scale(zero=False)),
-                color="yearpublished:O",
-                tooltip=["name", "yearpublished", "average", "usersrated", "id"],
-            )
+        alt.Chart(voted)
+        .mark_point()
+        .encode(
+            x=alt.X(
+                "averageweight:Q",
+                title="Weight",
+                scale=alt.Scale(domain=[0.95, 5], nice=False),
+            ),
+            y=alt.Y("average:Q", title="BGG Rating", scale=alt.Scale(zero=False)),
+            opacity="usersrated:O",
+            #  color=alt.Color(
+            #  "yearpublished:O",
+            #  scale=alt.Scale(scheme="yellowgreenblue"),
+            #  title="BGG Rating",
+            #  ),
+            tooltip=[
+                "name",
+                "yearpublished",
+                "average",
+                "usersrated",
+                "wishing",
+                "id",
+            ],
         )
-        .properties(title="Rating vs weight", width=800, height=800)
-        .interactive()
-    )
+    ).properties(title="Rating vs Complexity", width=800, height=800)
     return fig
 
 
 def get_trendline(voted):
     x, y = linear_regression(voted)
-    model_data = pd.DataFrame(dict(x=x, y=y))
+    model_data = pd.DataFrame(dict(x=list(x), y=list(y)))
     fig = (
         alt.Chart(model_data)
         .mark_line()
@@ -68,6 +81,6 @@ if __name__ == "__main__":
 
     df = get_data()
     fig = fig_rating_weight(df)
-    #  fig.show()
-    fig.save("charts/rating_weight.html")
-    fig.save("charts/rating_weight.png")
+    fig.show()
+    #  fig.save("charts/rating_weight.html")
+    #  fig.save("charts/rating_weight.png")

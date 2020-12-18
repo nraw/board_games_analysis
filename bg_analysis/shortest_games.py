@@ -8,33 +8,30 @@ alt.data_transformers.disable_max_rows()
 def get_most_rated(df):
     #  most_rated = df[df.wishing > 10]
     #  most_rated = df[df.wishing > 100]
-    #  most_rated = df[df.usersrated > 50]
-    most_rated = df
-    #  most_rated = most_rated[most_rated.averageweight != 0]
-    #  most_rated = most_rated[most_rated.expansion == False]
-    #  most_rated = most_rated[most_rated.reimplementation == False]
+    most_rated = df[df.usersrated > 50]
+    most_rated = most_rated[most_rated.averageweight != 0]
+    most_rated = most_rated[most_rated.expansion == False]
+    most_rated = most_rated[most_rated.reimplementation == False]
     return most_rated
 
 
-def fig_longest_games(df):
+def fig_shortest_games(df):
     most_rated = get_most_rated(df)
-    longest_games = most_rated[most_rated.playingtime > 1000]
+    shortest_games = most_rated[most_rated.playingtime <= 20]
+    shortest_games = shortest_games[shortest_games.playingtime > 0]
     fig = (
         (
-            alt.Chart(longest_games)
+            alt.Chart(shortest_games)
             .mark_point()
             .encode(
-                y=alt.Y(
-                    "average:Q",
-                    title="BGG Rating",
-                    scale=alt.Scale(domain=[-0.1, 10.1], nice=False),
-                ),
+                y=alt.Y("average:Q", title="BGG Rating", scale=alt.Scale(zero=False)),
                 x=alt.X(
-                    "x:Q",
-                    title="Playtime in hours",
-                    scale=alt.Scale(type="log", domain=[10, 3000000], nice=False),
+                    "averageweight:Q",
+                    title="Weight",
+                    scale=alt.Scale(domain=[0.9, 3.5], nice=False),
                 ),
                 color=alt.Color("wishing:O", legend=None),
+                facet=alt.Facet("x:Q"),
                 tooltip=[
                     "name",
                     "yearpublished",
@@ -49,26 +46,40 @@ def fig_longest_games(df):
                 #  opacity="wishing",
             )
         )
-        .transform_calculate(x="datum.playingtime / 60")
-        .properties(title="The longest games", width=1000, height=400,)
+        .transform_calculate(x="round(datum.playingtime / 5)*5")
+        .properties(
+            title="The shortest games by approximate playing time",
+            width=200,
+            height=400,
+        )
         .interactive()
     )
     return fig
 
 
-def fig_longest_games_annotations(df):
-    cool_games_list = (
-        df.sort_values("playingtime", ascending=False).head(9).name.to_list()
-    )
-    cool_games_list += ["Europa Universalis"]
-    fixes = [("Weltindor's Stones", 0.2)]
+def fig_rating_wished_annotations(df):
+    """ sad times, it doesn't allow for annotations on facets """
+    cool_games_list = [
+        "Happy Salmon",
+        "Inhuman Conditions",
+        "Zombie Kidz Evolution",
+        "Codenames",
+        "Hanamikoji",
+        "FUSE",
+        "5-Minute marvel",
+        "KLASK",
+        "The Crew: The Quest for Planet Nine",
+        "Tic-Tac-Toe",
+    ]
+    #  fixes = [("Scythe", 300), ("Root", -200), ("Gaia Project", -100)]
+    fixes = []
     df = fix_annotations(df, fixes, y="average")
     cool_games = df[df.name.isin(cool_games_list)]
     annotation = (
         alt.Chart(cool_games)
         .mark_text(align="left", baseline="middle", fontSize=9, dx=7)
-        .encode(y="fix", text="name", x=alt.X("x:Q", scale=alt.Scale(type="log")),)
-    ).transform_calculate(x="datum.playingtime / 60")
+        .encode(x="averageweight", y="fix", text="name")
+    )
     return annotation
 
 
@@ -85,8 +96,8 @@ if __name__ == "__main__":
     from bg_analysis.de import get_data
 
     df = get_data()
-    fig_l = fig_longest_games(df)
-    annotation = fig_longest_games_annotations(df)
-    (fig_l + annotation).show()
+    #  fig_l = fig_longest_games(df)
+    fig_s = fig_shortest_games(df)
+    fig_s.show()
     #  fig_l.save("charts/longest_games.html")
     #  fig_s.save("charts/shortest_games.html")

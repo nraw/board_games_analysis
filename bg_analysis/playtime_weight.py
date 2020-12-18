@@ -12,7 +12,8 @@ def get_most_rated(df):
     most_rated = df[df.usersrated > 50]
     most_rated = most_rated[most_rated.averageweight != 0]
     most_rated = most_rated[most_rated.expansion == False]
-    most_rated = most_rated[most_rated.reimplementation == False]
+    #  most_rated = most_rated[most_rated.reimplementation == False]
+    most_rated = most_rated.sort_values("wishing", ascending=False).head(8000)
     return most_rated
 
 
@@ -32,9 +33,17 @@ def get_base_fig(normal_games):
             alt.Chart(normal_games)
             .mark_point()
             .encode(
-                x=alt.X("playingtime:Q", scale=alt.Scale(type="log", zero=False)),
-                y=alt.Y("averageweight:Q", scale=alt.Scale(zero=False)),
-                #  color="yearpublished:O",
+                x=alt.X(
+                    "playingtime:Q",
+                    title="Game length in minutes",
+                    scale=alt.Scale(type="log", nice=False, domain=[1, 1500]),
+                ),
+                y=alt.Y(
+                    "averageweight:Q",
+                    title="Weight (Complexity)",
+                    scale=alt.Scale(zero=False),
+                ),
+                color=alt.Color("wishing:O", legend=None),
                 tooltip=[
                     "name",
                     "yearpublished",
@@ -97,5 +106,5 @@ if __name__ == "__main__":
     #  fig_s = fig_shortest_games(df)
     fig_w = fig_playingtime_weight(df)
     fig_w.show()
-    fig_w.save("charts/playtime_weight.html")
+    #  fig_w.save("charts/playtime_weight.html")
     #  fig_s.save("charts/shortest_games.html")

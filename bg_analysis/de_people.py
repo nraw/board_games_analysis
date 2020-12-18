@@ -15,6 +15,7 @@ def get_designers(df):
                 "average",
                 "usersrated",
                 "yearpublished",
+                "wishing",
             ]
         ],
         left_index=True,
@@ -37,6 +38,7 @@ def get_artists(df):
                 "average",
                 "usersrated",
                 "yearpublished",
+                "wishing",
             ]
         ],
         left_index=True,

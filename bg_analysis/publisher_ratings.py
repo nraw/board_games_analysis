@@ -42,7 +42,7 @@ def fig_publisher_ratings(df):
                 ],
             )
         )
-        .properties(title="publishers ratings vs contributions", width=800, height=800)
+        .properties(title="publishers ratings vs contributions", width=800, height=400)
         .interactive()
     )
     return fig
@@ -53,5 +53,5 @@ if __name__ == "__main__":
 
     df = get_data()
     fig = fig_publisher_ratings(df)
-    #  fig.show()
+    fig.show()
     #  fig.save("charts/publishers_ratings.html")

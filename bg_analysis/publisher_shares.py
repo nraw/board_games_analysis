@@ -29,26 +29,22 @@ def fig_publisher_shares(df):
     publishers = get_publishers(df)
     publishers_agg = get_aggregates(publishers)
     fig = (
-        (
-            alt.Chart(publishers_agg)
-            .mark_bar()
-            .encode(
-                y=alt.Y("publishers:N", sort="-x"),
-                x=alt.X("id:Q"),
-                color="average:Q",
-                tooltip=[
-                    "publishers",
-                    "average",
-                    "id",
-                    "name",
-                    "usersrated",
-                    "yearpublished",
-                ],
-            )
+        alt.Chart(publishers_agg)
+        .mark_bar()
+        .encode(
+            y=alt.Y("publishers:N", sort="-x", title="Publishers"),
+            x=alt.X("id:Q", title="Games"),
+            color=alt.Color("average:Q", bin=True, title="Average BGG Rating"),
+            tooltip=[
+                "publishers",
+                "average",
+                "id",
+                "name",
+                "usersrated",
+                "yearpublished",
+            ],
         )
-        .properties(title="Publishers with most games", width=800, height=800)
-        .interactive()
-    )
+    ).properties(title="Publishers with most games", width=800, height=400)
     return fig
 
 
@@ -76,26 +72,22 @@ def fig_publisher_wishes(df):
     publishers = get_publishers(df)
     publishers_agg = get_wishing_aggregates(publishers)
     fig = (
-        (
-            alt.Chart(publishers_agg)
-            .mark_bar()
-            .encode(
-                y=alt.Y("publishers:N", sort="-x"),
-                x=alt.X("wishing:Q"),
-                color="id:Q",
-                tooltip=[
-                    "publishers",
-                    "average",
-                    "id",
-                    "name",
-                    "usersrated",
-                    "yearpublished",
-                ],
-            )
+        alt.Chart(publishers_agg)
+        .mark_bar()
+        .encode(
+            y=alt.Y("publishers:N", sort="-x", title="Publishers"),
+            x=alt.X("wishing:Q", title="Total Wishing"),
+            color=alt.Color("id:Q", bin=True, title="Number of games"),
+            tooltip=[
+                "publishers",
+                "average",
+                "id",
+                "name",
+                "usersrated",
+                "yearpublished",
+            ],
         )
-        .properties(title="Publishers with most wished games", width=800, height=800)
-        .interactive()
-    )
+    ).properties(title="Publishers with most wished games", width=800, height=400)
     return fig
 
 
@@ -103,6 +95,8 @@ if __name__ == "__main__":
     from bg_analysis.de import get_data
 
     df = get_data()
-    fig = fig_publisher_shares(publishers)
+    #  fig = fig_publisher_shares(df)
     #  fig.show()
+    fig_w = fig_publisher_wishes(df)
+    fig_w.show()
     #  fig.save("charts/publishers_games.html")

@@ -12,7 +12,7 @@ def get_most_rated(mechanics):
     most_rated = mechanics[mechanics.usersrated > 150]
     #  most_rated = most_rated[most_rated.averageweight != 0]
     most_rated = most_rated[most_rated.expansion == False]
-    most_rated = most_rated[most_rated.reimplementation == False]
+    #  most_rated = most_rated[most_rated.reimplementation == False]
     most_rated = most_rated[most_rated.yearpublished <= 2020]
 
     return most_rated
@@ -25,8 +25,8 @@ def fig_best_mechanics(df):
         alt.Chart(most_rated)
         .mark_point()
         .encode(
-            y=alt.Y("average:Q", scale=alt.Scale(zero=False)),
-            x=alt.X("averageweight:Q", scale=alt.Scale(type="linear")),
+            y=alt.Y("average:Q", title="BGG Rating", scale=alt.Scale(zero=False)),
+            x=alt.X("averageweight:Q", title="Weight", scale=alt.Scale(type="linear")),
             #  color="yearpublished:O",
             tooltip=[
                 "name",
@@ -41,11 +41,11 @@ def fig_best_mechanics(df):
                 columns=5,
                 sort=alt.EncodingSortField("name", op="count", order="descending"),
             ),
-            #  color="usersrated:Q",
+            color=alt.Color("wishing:O", legend=None),
             #  size="wishing",
             #  opacity="wishing",
         )
-    ).properties(title="Board Game by mechanics", width=100, height=100,)
+    ).properties(title="Board Game by Mechanics", width=100, height=100,)
     return fig
 
 
