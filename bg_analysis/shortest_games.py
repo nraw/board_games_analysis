@@ -31,7 +31,7 @@ def fig_shortest_games(df):
                     scale=alt.Scale(domain=[0.9, 3.5], nice=False),
                 ),
                 color=alt.Color("wishing:O", legend=None),
-                facet=alt.Facet("x:Q"),
+                facet=alt.Facet("x:Q", title="Playing time in minutes"),
                 tooltip=[
                     "name",
                     "yearpublished",
