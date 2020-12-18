@@ -3,7 +3,7 @@ _2020 December_
 
 Data + this guy is on vacation = Analysis!
 
-You should be checking this page on [this page](https://nraw.github.io/board_games_analysis/) so that links correctly follow to the charts!
+You should be reading this on [this page](https://nraw.github.io/board_games_analysis/) so that links correctly follow to the charts!
 And on that note, click on any of the charts for the interactive versions with hover tooltips! Ooooh... tooltips...!
 
 ## What are the best games out there?
