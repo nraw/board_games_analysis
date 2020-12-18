@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-3909db2f28ccb19dab4345b2d2cd31e8"}, "mark": "bar", "encoding": {"color": {"type": "quantitative", "bin": true, "field": "id", "title": "Number of games"}, "tooltip": [{"type": "nominal", "field": "publishers"}, {"type": "quantitative", "field": "average"}, {"type": "quantitative", "field": "id"}, {"type": "nominal", "field": "name"}, {"type": "quantitative", "field": "usersrated"}, {"type": "quantitative", "field": "yearpublished"}], "x": {"type": "quantitative", "field": "wishing", "title": "Total Wishing"}, "y": {"type": "nominal", "field": "publishers", "sort": "-x", "title": "Publishers"}}, "height": 400, "title": "Publishers with most wished games", "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-3909db2f28ccb19dab4345b2d2cd31e8": [{"publishers": "999 Games", "id": 655, "average": 6.770929908396946, "name": "Wingspan, Agricola, Caverna: The Cave Farmers", "usersrated": 2575165.0, "yearpublished": 2020, "wishing": 446416.0}, {"publishers": "Arclight", "id": 414, "average": 6.904217512077298, "name": "Scythe, Terraforming Mars, Wingspan", "usersrated": 1850622.0, "yearpublished": 2020, "wishing": 447077.0}, {"publishers": "Asmodee", "id": 1012, "average": 6.8431169861660015, "name": "Gloomhaven, 7 Wonders, Mage Knight Board Game", "usersrated": 2807667.0, "yearpublished": 2021, "wishing": 646982.0}, {"publishers": "Asterion Press", "id": 374, "average": 7.549470240641711, "name": "7 Wonders, Pandemic Legacy: Season 1, Twilight Struggle", "usersrated": 1892051.0, "yearpublished": 2019, "wishing": 433569.0}, {"publishers": "Devir", "id": 479, "average": 7.043731398747382, "name": "Terra Mystica, Pandemic Legacy: Season 1, Agricola", "usersrated": 2969283.0, "yearpublished": 2020, "wishing": 545915.0}, {"publishers": "Edge Entertainment", "id": 1433, "average": 7.315083558967192, "name": "Robinson Crusoe: Adventures on the Cursed Island, Power Grid, Blood Rage", "usersrated": 2778701.0, "yearpublished": 2021, "wishing": 637476.0}, {"publishers": "Fantasy Flight Games", "id": 2087, "average": 6.766314662194535, "name": "Star Wars: Rebellion, Mansions of Madness: Second Edition, Twilight Imperium: Fourth Edition", "usersrated": 1558691.0, "yearpublished": 2021, "wishing": 428825.0}, {"publishers": "Gal\u00e1pagos Jogos", "id": 324, "average": 7.3604406172839525, "name": "Gloomhaven, 7 Wonders, Power Grid", "usersrated": 2440452.0, "yearpublished": 2020, "wishing": 479323.0}, {"publishers": "G\u00e9m Klub Kft.", "id": 241, "average": 6.974981286307054, "name": "Gloomhaven, Spirit Island, Terra Mystica", "usersrated": 2049427.0, "yearpublished": 2021, "wishing": 419201.0}, {"publishers": "Heidelberger Spieleverlag", "id": 1097, "average": 7.310534320875114, "name": "Star Wars: Rebellion, Mansions of Madness: Second Edition, Dead of Winter: A Crossroads Game", "usersrated": 2130238.0, "yearpublished": 2020, "wishing": 527943.0}, {"publishers": "Hobby Japan", "id": 457, "average": 6.854988774617067, "name": "7 Wonders, Pandemic Legacy: Season 1, Agricola", "usersrated": 2376793.0, "yearpublished": 2020, "wishing": 462100.0}, {"publishers": "Hobby World", "id": 652, "average": 6.863820322085893, "name": "Gloomhaven, Spirit Island, Robinson Crusoe: Adventures on the Cursed Island", "usersrated": 2996041.0, "yearpublished": 2021, "wishing": 574525.0}, {"publishers": "Korea Boardgames Co., Ltd.", "id": 608, "average": 6.931432220394736, "name": "Terraforming Mars, Gloomhaven, Root", "usersrated": 3635696.0, "yearpublished": 2021, "wishing": 692240.0}, {"publishers": "Pegasus Spiele", "id": 973, "average": 6.6639197430627, "name": "Spirit Island, Robinson Crusoe: Adventures on the Cursed Island, Everdell", "usersrated": 1913571.0, "yearpublished": 2021, "wishing": 479353.0}, {"publishers": "Rebel Sp. z o.o.", "id": 554, "average": 7.108537743682312, "name": "Terraforming Mars, Wingspan, 7 Wonders", "usersrated": 2640129.0, "yearpublished": 2021, "wishing": 577369.0}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

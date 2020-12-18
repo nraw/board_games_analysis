@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-9ce4b7e6012e1671b3d2041b0726a7b3"}, "mark": "bar", "encoding": {"color": {"type": "quantitative", "bin": true, "field": "average", "title": "Average BGG Rating"}, "tooltip": [{"type": "nominal", "field": "publishers"}, {"type": "quantitative", "field": "average"}, {"type": "quantitative", "field": "id"}, {"type": "nominal", "field": "name"}, {"type": "quantitative", "field": "usersrated"}, {"type": "quantitative", "field": "yearpublished"}], "x": {"type": "quantitative", "field": "id", "title": "Games"}, "y": {"type": "nominal", "field": "publishers", "sort": "-x", "title": "Publishers"}}, "height": 400, "title": "Publishers with most games", "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-9ce4b7e6012e1671b3d2041b0726a7b3": [{"publishers": "(Self-Published)", "id": 8021, "average": 4.39318592569506, "name": "Twilight Struggle, Cards Against Humanity, Exploding Kittens", "usersrated": 359939.0, "yearpublished": 2022, "wishing": 97647.0}, {"publishers": "(Unknown)", "id": 2217, "average": 2.7447573703202535, "name": "Pandemic, Citadels, Munchkin", "usersrated": 733715.0, "yearpublished": 2021, "wishing": 47068.0}, {"publishers": "(Unpublished)", "id": 1232, "average": 3.1992344886363644, "name": "Unpublished Prototype, HeroQuest 25th Anniversary Edition, Gremlins Inc", "usersrated": 3388.0, "yearpublished": 2021, "wishing": 10410.0}, {"publishers": "(Web published)", "id": 6197, "average": 4.726332005809261, "name": "Love Letter, The Resistance, Cards Against Humanity", "usersrated": 329116.0, "yearpublished": 2021, "wishing": 120009.0}, {"publishers": "Asmodee", "id": 1012, "average": 6.843116986166011, "name": "Pandemic, 7 Wonders, Small World", "usersrated": 2807667.0, "yearpublished": 2021, "wishing": 646982.0}, {"publishers": "Edge Entertainment", "id": 1433, "average": 7.315083558967189, "name": "Ticket to Ride, Small World, Ticket to Ride: Europe", "usersrated": 2778701.0, "yearpublished": 2021, "wishing": 637476.0}, {"publishers": "Fantasy Flight Games", "id": 2087, "average": 6.766314662194536, "name": "Citadels, Arkham Horror, Battlestar Galactica: The Board Game", "usersrated": 1558691.0, "yearpublished": 2021, "wishing": 428825.0}, {"publishers": "Games Workshop Ltd.", "id": 1050, "average": 5.815160666666668, "name": "Talisman (Revised 4th Edition), Fury of Dracula (Third/Fourth Edition), HeroQuest", "usersrated": 164330.0, "yearpublished": 2020, "wishing": 35938.0}, {"publishers": "Hasbro", "id": 1528, "average": 4.59604655533726, "name": "Betrayal at House on the Hill, Risk, Chess", "usersrated": 764414.0, "yearpublished": 2020, "wishing": 54198.0}, {"publishers": "Heidelberger Spieleverlag", "id": 1097, "average": 7.310534320875114, "name": "Codenames, King of Tokyo, Dead of Winter: A Crossroads Game", "usersrated": 2130238.0, "yearpublished": 2020, "wishing": 527943.0}, {"publishers": "Milton Bradley", "id": 1565, "average": 4.019499718849842, "name": "Chess, Scrabble, Go", "usersrated": 474863.0, "yearpublished": 2013, "wishing": 35196.0}, {"publishers": "Parker Brothers", "id": 1404, "average": 4.028555876068372, "name": "Risk, Chess, Monopoly", "usersrated": 574011.0, "yearpublished": 2017, "wishing": 33054.0}, {"publishers": "Ravensburger", "id": 1416, "average": 4.780747189265537, "name": "Puerto Rico, The Castles of Burgundy, For Sale", "usersrated": 798658.0, "yearpublished": 2020, "wishing": 135852.0}, {"publishers": "The Game Crafter, LLC", "id": 1509, "average": 4.49203539430086, "name": "Go, Chinese Checkers, Roll For It!", "usersrated": 41813.0, "yearpublished": 2021, "wishing": 12877.0}, {"publishers": "Warp Spawn Games", "id": 1032, "average": 3.913525939922481, "name": "Malta Convoy: Operation Pedestal, Time Line, Medieval Manor", "usersrated": 1470.0, "yearpublished": 2017, "wishing": 1699.0}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

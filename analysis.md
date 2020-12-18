@@ -25,6 +25,7 @@ A problem with the wished definition is that it is biased towards expensive game
 
 ## Are more difficult games higher rated?
 
+
 [![Foo](charts/rating_weight.png)](charts/rating_weight.html)
 
 ## What are the best games depending on number of players?
