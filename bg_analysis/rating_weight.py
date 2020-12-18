@@ -32,7 +32,7 @@ def get_base_fig(voted):
                 scale=alt.Scale(domain=[0.95, 5], nice=False),
             ),
             y=alt.Y("average:Q", title="BGG Rating", scale=alt.Scale(zero=False)),
-            opacity="usersrated:O",
+            opacity=alt.Opacity("usersrated:O", legend=None),
             #  color=alt.Color(
             #  "yearpublished:O",
             #  scale=alt.Scale(scheme="yellowgreenblue"),
@@ -47,7 +47,7 @@ def get_base_fig(voted):
                 "id",
             ],
         )
-    ).properties(title="Rating vs Complexity", width=800, height=800)
+    ).properties(title="Rating vs Weight", width=800, height=400)
     return fig
 
 
