@@ -69,8 +69,8 @@ def fig_expansions_rating_wished(df):
             alt.Chart(most_rated)
             .mark_point()
             .encode(
-                x=alt.X("average:Q", scale=alt.Scale(zero=False)),
-                y=alt.Y("wishing:Q", scale=alt.Scale(type="linear")),
+                x=alt.X("average:Q", title="BGG Rating", scale=alt.Scale(zero=False)),
+                y=alt.Y("wishing:Q", title="Wishing", scale=alt.Scale(type="linear")),
                 #  color="yearpublished:O",
                 tooltip=["name", "yearpublished", "average", "wishing", "id"],
                 #  size="wishing",

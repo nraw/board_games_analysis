@@ -1,8 +1,10 @@
 # Board game analysis
+_2020 December_
 
 Data + this guy is on vacation = Analysis!
 
-Click on any of the charts for the interactive versions with tooltips! Ooooh... tooltips...!
+You should be checking this page on [this page](https://nraw.github.io/board_games_analysis/) so that links correctly follow to the charts!
+And on that note, click on any of the charts for the interactive versions with hover tooltips! Ooooh... tooltips...!
 
 ## What are the best games out there?
 
@@ -22,9 +24,9 @@ A problem with the wished definition is that it is biased towards expensive game
 
 ## Which games have the most skewed trading/wanting ratio?
 [![Foo](charts/want_trade.png)](charts/want_trade.html)
+I find it funny and in all honesty fully expected that the game people want to get rid of the most is Munchkin, the most popular game focused around betrayal.
 
 ## Are more difficult games higher rated?
-
 
 [![Foo](charts/rating_weight.png)](charts/rating_weight.html)
 
@@ -39,10 +41,21 @@ The hell was the North African campaign game for 10 people...
 [![Foo](charts/shortest_games.png)](charts/shortest_games.html)
 
 Sometimes there's a need for easier and quicker games. Mostly these are referred to filler games as they could be played as a side to the main game of the evening.
+Some notable games:
+- 1 minute:
+    - [Happy Salmon](https://www.youtube.com/watch?v=aeT2qssQii8) is... a happy salmon game
+- 5 minutes:
+    - [Inhuman conditions](https://www.youtube.com/watch?v=pLR6yGVJs0Y) is a surreal interrogation game
+    - [5-minute Marvel](https://www.youtube.com/watch?v=PZx1k0DmfjU) is a fast cooperative dungeon clearing game
+- 10 minutes:
+    - [FUSE](https://www.youtube.com/watch?v=932eBqMSf64) is a game where you cooperatively defuse bombs
+    - [KLASK](https://www.youtube.com/watch?v=ZTpPzAzzwyU) looks super entertaining although maybe looks more like a toy?
+- 15 minutes:
+    - [Codenames](https://www.youtube.com/watch?v=3UEbi7GWMPg) is a quite popular party game
+- 20 minutes:
+    - [The Crew](https://www.youtube.com/watch?v=D7efIcZFMp8) looks amazing!
+    - [Santorini](https://www.youtube.com/watch?v=H7oRu8QuEMc) is a simple and charming abstract game
 
-- [The Crew](https://www.youtube.com/watch?v=D7efIcZFMp8) looks amazing!
-- [Inhuman conditions](https://www.youtube.com/watch?v=pLR6yGVJs0Y) 
-- [KLASK](https://www.youtube.com/watch?v=ZTpPzAzzwyU) looks super entertaining although maybe looks more like a toy?
 
 
 
@@ -108,21 +121,27 @@ Well.. sort of, but they are shadowed by games like Advanced Squad Leader with a
 
 [![Foo](charts/most_wished_expansions.png)](charts/most_wished_expansions.html)
 
-### Highest by year
+
+## Dice Tower Certificate of Excellence and Shut up & Sit Down Recommendations
+
+My go to for reviews are usually these two groups. So I wanted to have a quick overview of the games they recommend.
+
+[![Foo](charts/susd_dt.png)](charts/susd_dt.html)
+
+## Highest rated games through time
 
 [![Foo](charts/rating_year.png)](charts/rating_year.html)
 
-
-## Dice Tower Certificate of Excellence and Shut up & Sit Down Recommendations
-[![Foo](charts/susd_dt.png)](charts/susd_dt.html)
+Even though it appears like the average rating is going up, bear in mind that this analysis was done in 2020, while the last two columns at the time of this writing are 2021 and 2022. My assumption is that only games that are hyped enough so that people know about them a year ahead make it to get a backing and appear on that list, so the future games are already weeded out. Not to mention that at this stage, it's most likely being rated predominately by fans or kickstarter supporters.
 
 ---
 
 # Appendix
 
-## What's a game?
-Most of the quantitative numbers focused on number of games. But it's not the easiest decision to make what should consist of a game.
-My assumptions:
+## What consitutes a game?
+Since some of the quantitative numbers focused on number of games, I realised there might be some weird scenarios that require some more thought. Is just a refurbishing of a game a new game? Is a lighter version of it, or a spin off a new game or is it basically the same? 
+
+It's not the easiest decision to make to decide what should consist of a game so in some cases I applied the following assumptions:
 - I decided that I don't count expansions, they are part of the same game.
 - I don't count different editions, they are the same game.
 - I don't count reimplementations where I managed to identify these.

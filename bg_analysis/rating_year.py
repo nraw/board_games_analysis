@@ -15,8 +15,8 @@ def fig_rating_year(df):
             alt.Chart(most_rated)
             .mark_point()
             .encode(
-                y=alt.Y("average:Q", scale=alt.Scale(zero=False)),
-                x="yearpublished:O",
+                y=alt.Y("average:Q", title="BGG Rating", scale=alt.Scale(zero=False)),
+                x=alt.X("yearpublished:O", title="Year Published"),
                 #  color="yearpublished:O",
                 tooltip=["name", "yearpublished", "average", "wishing", "id"],
                 #  size="wishing",
@@ -34,5 +34,6 @@ if __name__ == "__main__":
 
     df = get_data()
     fig = fig_rating_year(df)
-    fig.save("charts/rating_year.html")
-    fig.save("charts/rating_year.png")
+    fig.show()
+    #  fig.save("charts/rating_year.html")
+    #  fig.save("charts/rating_year.png")

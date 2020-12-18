@@ -20,7 +20,11 @@ def fig_wished_owned(df):
             .encode(
                 x=alt.X("owned:Q", title="Owned"),
                 y=alt.Y("wishing:Q", title="Wishing"),
-                #  color="yearpublished:O",
+                color=alt.Color(
+                    "average:Q",
+                    scale=alt.Scale(scheme="yellowgreenblue"),
+                    title="BGG Rating",
+                ),
                 tooltip=["name", "yearpublished", "wishing", "owned", "average", "id"],
                 #  size="wishing",
                 #  opacity="wishing",
@@ -83,6 +87,6 @@ if __name__ == "__main__":
 
     df = get_data()
     fig = fig_wished_owned(df)
-    #  fig.show()
-    fig.save("charts/wished_owned.html")
-    altair_saver.save(fig, "charts/wished_owned.png")
+    fig.show()
+    #  fig.save("charts/wished_owned.html")
+    #  altair_saver.save(fig, "charts/wished_owned.png")

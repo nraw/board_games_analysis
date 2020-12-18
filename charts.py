@@ -26,7 +26,7 @@ from bg_analysis.expansions import (
     fig_expansions_rating_wished,
     fig_expansions_rating_wished_annotations,
 )
-from bg_analysis.want_trade import fig_want_trade
+from bg_analysis.want_trade import fig_want_trade, fig_want_traded_annotations
 from bg_analysis.susd import fig_susd_dt
 
 alt.data_transformers.disable_max_rows()
@@ -36,7 +36,7 @@ def generate_all_charts():
     df = get_data()
     save_chart(fig_rating_wished, df, "rating_wished", fig_rating_wished_annotations)
     save_chart(fig_wished_owned, df, "wished_owned", fig_wished_owned_annotations)
-    save_chart(fig_want_trade, df, "want_trade")
+    save_chart(fig_want_trade, df, "want_trade", fig_want_traded_annotations)
     save_chart(fig_rating_weight, df, "rating_weight")
     save_chart(fig_best_players, df, "best_players")
     save_chart(fig_shortest_games, df, "shortest_games")
@@ -56,7 +56,7 @@ def generate_all_charts():
         "most_wished_expansions",
         fig_expansions_rating_wished_annotations,
     )
-    save_chart(fig_rating_year, df, "fig_rating_year")
+    save_chart(fig_rating_year, df, "rating_year")
     save_chart(fig_susd_dt, df, "susd_dt")
 
 
