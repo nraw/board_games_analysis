@@ -18,6 +18,7 @@ def fig_rating_year(df):
                 y=alt.Y("average:Q", title="BGG Rating", scale=alt.Scale(zero=False)),
                 x=alt.X("yearpublished:O", title="Year Published"),
                 #  color="yearpublished:O",
+                color=alt.Color("wishing:O", legend=None),
                 tooltip=["name", "yearpublished", "average", "wishing", "id"],
                 #  size="wishing",
                 #  opacity="wishing",
