@@ -43,7 +43,10 @@ def get_data():
     susd = get_geeklist("244099")
     df["susd"] = df.id.isin(susd)
     logger.info("Obtained SUSD geeklist")
-
+    logger.info("Obtaining BGA geeklist")
+    bga = get_geeklist("252354")
+    df["bga"] = df.id.isin(bga)
+    logger.info("Obtained BGA geeklist")
     return df
 
 

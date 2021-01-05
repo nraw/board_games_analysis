@@ -48,3 +48,8 @@ def get_families_filter(df):
         columns={"families": "property"}
     )
     return families_filter
+
+
+def get_unique_filters(all_filters):
+    unique_filters = list(all_filters.property.value_counts().index)
+    return unique_filters

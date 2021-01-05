@@ -28,6 +28,7 @@ from bg_analysis.expansions import (
 )
 from bg_analysis.want_trade import fig_want_trade, fig_want_traded_annotations
 from bg_analysis.susd import fig_susd_dt
+from bg_analysis.bga import fig_bga
 
 alt.data_transformers.disable_max_rows()
 
@@ -58,6 +59,7 @@ def generate_all_charts():
     )
     save_chart(fig_rating_year, df, "rating_year")
     save_chart(fig_susd_dt, df, "susd_dt")
+    save_chart(fig_bga, df, "bga")
 
 
 def save_chart(f, df, chart_name, annotation_f=None):
@@ -72,6 +74,6 @@ def save_chart(f, df, chart_name, annotation_f=None):
     logger.info(f"Charts {html_chart} and {png_chart} saved")
 
 
-def open_chart(f, df, chart_name):
+def open_chart(f, df):
     fig = f(df)
     fig.show()

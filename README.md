@@ -142,6 +142,13 @@ All of these games have a guarantee to be among the best games out there, so che
 
 From the chart above it appears that the average rating is going up throughout time. However, bear in mind that this analysis was done in 2020, while the last two columns are for 2021 and 2022. My assumption is that these games are the ones that are hyped enough to get a following months before being published. At this stage, they are most likely being rated predominately by fans or kickstarter supporters.
 
+## Games available on Board Game Arena
+
+[![Foo](charts/bga.png)](charts/bga.html)
+
+For those unaware, you can play board games online for free on [Board Game Arena](https://boardgamearena.com). Or well, you can play most of those games for free, as others might only available for premium users. Still cool though!
+
+
 ## Suggestions?
 
 Feel free to join [the discussions page!](https://github.com/nraw/board_games_analysis/discussions)

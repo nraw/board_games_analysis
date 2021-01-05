@@ -91,6 +91,7 @@ def get_categories(df):
         left_index=True,
         right_index=True,
     )
+    categories = categories.sort_values("wishing", ascending=False)
     return categories
 
 
@@ -115,6 +116,7 @@ def get_mechanics(df):
         left_index=True,
         right_index=True,
     )
+    mechanics = mechanics.sort_values("wishing", ascending=False)
     return mechanics
 
 
@@ -139,6 +141,7 @@ def get_families(df):
         left_index=True,
         right_index=True,
     )
+    families = families.sort_values("wishing", ascending=False)
     return families
 
 

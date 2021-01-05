@@ -18,5 +18,6 @@ def get_geeklist(geeklist_id):
 if __name__ == "__main__":
     geeklist_id = "244099"  # susd
     geeklist_id = "265480"  # dice tower excellence
+    geeklist_id = "252354"  # BGA
     geeklist = get_geeklist(geeklist_id)
 
