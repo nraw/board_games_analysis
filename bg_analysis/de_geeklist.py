@@ -11,7 +11,7 @@ def get_geeklist(geeklist_id):
     xml_content = res.content
     bs = BeautifulSoup(xml_content, "lxml")
     items = bs.find_all("item")
-    geeklist = [item.get("objectid") for item in items]
+    geeklist = [int(item.get("objectid")) for item in items]
     return geeklist
 
 

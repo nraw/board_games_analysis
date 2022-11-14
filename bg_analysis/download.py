@@ -3,18 +3,19 @@ import json
 from tqdm import tqdm
 from functools import lru_cache
 
-max_game = 350000
-batch_size = 500
+min_game = 0
+max_game = 500000
+batch_size = 200
 
 
-def get_games(bgg):
+def get_games():
     bgg = BGGClient()
-    batches = get_batches(max_game, batch_size)
+    batches = get_batches(max_game, batch_size, min_game)
     [get_games_batches(batch, bgg) for batch in tqdm(batches)]
 
 
-def get_batches(max_game, batch_size):
-    a = range(0, max_game, batch_size)
+def get_batches(max_game, batch_size, min_game = 0):
+    a = range(min_game, max_game, batch_size)
     batches = [x for x in zip(a[:-1], a[1:])]
     return batches
 
@@ -28,7 +29,7 @@ def get_games_batches(batch, bgg):
         print(f"No new data at {batch[0]}")
 
 
-@lru_cache(1000)
+@lru_cache(5000)
 def get_games_batch(batch, bgg):
     games_batch = bgg.game_list(range(*batch))
     return games_batch

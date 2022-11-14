@@ -1,7 +1,7 @@
 import json
 import altair as alt
 import pandas as pd
-import pathlib
+from pathlib import Path
 import numpy as np
 from functools import lru_cache
 
@@ -13,9 +13,13 @@ tqdm.pandas()
 
 
 @lru_cache(1)
-def get_data():
+def get_data(df_path = 'data/df.csv'):
+    if Path(df_path).exists():
+        logger.info("Loading premade df")
+        df = pd.read_csv(df_path)
+        return df
     logger.info("Loading jsons.")
-    batches = pathlib.Path("data/dump").glob("*.json")
+    batches = Path("data/dump").glob("*.json")
     all_data = {}
     _ = [all_data.update(json.load(open(batch))) for batch in tqdm(batches)]
     logger.info("Loaded jsons.")
@@ -47,6 +51,7 @@ def get_data():
     bga = get_geeklist("252354")
     df["bga"] = df.id.isin(bga)
     logger.info("Obtained BGA geeklist")
+    df.to_csv(df_path, index=None)
     return df
 
 
@@ -61,7 +66,7 @@ def is_reimplementation(df):
     )
     max_max = df.game_family.apply(lambda x: max_game_family_rated.get(x))
     is_main_game = df.usersrated == max_max
-    special_editions = df.name.apply(lambda x: "Edition" in x)
+    special_editions = df.name.apply(lambda x: "Edition" in x if x else False)
     reimplementations = (
         (df.game_family != "") & (is_main_game != True)
     ) | special_editions

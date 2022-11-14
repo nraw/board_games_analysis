@@ -1,5 +1,5 @@
 # Board game analysis
-_2020 December_
+_2022 November_
 
 Data + this guy is on vacation = Analysis!
 

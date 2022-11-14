@@ -25,7 +25,6 @@ def fig_bga(df):
                 "average",
                 "usersrated",
                 "id",
-                "bestplayer",
             ],
         )
     ).properties(title="Games Available on BGA", width=800, height=400,)
